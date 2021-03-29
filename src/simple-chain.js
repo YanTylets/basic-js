@@ -6,9 +6,9 @@ const chainMaker = {
    return this.links.length;
   },
   addLink(value) { if (value === undefined){
-    this.links.push(`( )`);
+    this.links.push('( )');
   } else {
-  this.links.push(`( ${value} )`);
+  this.links.push('( ' + value + ' )');
   }
   return this;
   },
@@ -17,13 +17,17 @@ const chainMaker = {
     return this;
   },
   removeLink(position){
-    if(typeof(position) !== 'number' || position >= this.links.length || !Number.isInteger(position)) throw 'Error'
+    if(typeof(position) !== 'number' || position >= this.links.length || !Number.isInteger(position)) {
+      this.links = [];
+      throw 'Error';
+      }
     this.links.splice(position-1, 1);
     return this;
   },
   finishChain() {
-    return this.links.join('~~');
-    links=[];
+    let chain = this.links.join('~~');
+    this.links=[];
+    return chain;
   },
 }
 
